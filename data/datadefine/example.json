@@ -1,0 +1,17 @@
+{
+		[
+		{
+				"name": "id",
+				"type": "int32",
+				"key": true
+		},
+		{
+				"name": "name",
+				"type": "string"
+		},
+		{
+				"name": "subvalue",
+				"type": "int32"
+		}
+		]
+}
