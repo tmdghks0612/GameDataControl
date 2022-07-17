@@ -1,0 +1,11 @@
+
+*.vsidx
+*.lock
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.sqlite
+*.suo
+.vs/VSWorkspaceState.json
+.vs/ProjectSettings.json
