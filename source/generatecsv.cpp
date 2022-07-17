@@ -6,12 +6,34 @@ using namespace std;
 
 bool jsonToCsv(shared_ptr<Json::Value> jsonInput, const char* input, const char* output)
 {
+		Json::Reader jsonReader;
+		ifstream ifs(input);
+
+		// input file path validation check
+		if(ifs.is_open())
+		{
+				istream& istream = ifs;
+				if(false == jsonReader.parse(istream, *jsonInput))
+				{
+						cout << "[jsonToCsv Fail] jsonReader parse failed" << endl;
+						ifs.close();
+						return false;
+				}
+		}
+		else
+		{
+				cout << "[jsonToCsv Fail] no input file path : " << input << endl;
+				return false;
+		}
+
+		// close file io streams
+		ifs.close();
 		return true;
 }
 
 objects_t jsonToDicts(shared_ptr<Json::Value> jsonInput)
 {
-		auto objects = objects_t();
+		shred_ptr<objects_t> objects = make_shared<objects_t>();
 		return objects;
 }
 
@@ -23,25 +45,25 @@ shared_ptr<lines_t> dictsToCsv(objects_t o)
 
 int main(int argc, char *argv[])
 {
-		if(argc != 2)
+		if(argc != 3)
 		{
-				cout << "2 arguments required";
+				cout << "2 arguments required. argument count : " << argc << endl;
 				exit(1);
 		}
 
 		// json input file pointer
-		auto jsonInput = make_shared<Json::Value>();
+		shared_ptr<Json::Value> jsonInput = make_shared<Json::Value>();
 
-		auto ok = jsonToCsv(jsonInput, argv[1], argv[2]);
+		bool ok = jsonToCsv(jsonInput, argv[1], argv[2]);
 		if(!ok)
 		{
 				cout << "json to csv failed";
 				exit(1);
 		}
 
-		auto objects = jsonToDicts(jsonInput);
+		objects_t objects = jsonToDicts(jsonInput);
 
-		auto csv = dictsToCsv(objects);
+		shared_ptr<lines_t> csv = dictsToCsv(objects);
 
 		ofstream ofs;
 		ofs.open(argv[2]);

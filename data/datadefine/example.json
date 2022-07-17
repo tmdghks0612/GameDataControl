@@ -1,5 +1,5 @@
 {
-		[
+		"column_list": [
 		{
 				"name": "id",
 				"type": "int32",
