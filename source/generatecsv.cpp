@@ -33,7 +33,7 @@ bool jsonToCsv(shared_ptr<Json::Value> jsonInput, const char* input, const char*
 
 objects_t jsonToDicts(shared_ptr<Json::Value> jsonInput)
 {
-		shred_ptr<objects_t> objects = make_shared<objects_t>();
+		objects_t objects = make_shared<json_column_plist>();
 		return objects;
 }
 

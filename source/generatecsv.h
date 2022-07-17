@@ -5,9 +5,10 @@ using namespace std;
 
 // type definition for json types
 typedef std::vector<std::pair<string, string>> json_column;
+typedef std::vector<shared_ptr<std::vector<std::pair<string, string>>>> json_column_plist;
 
 typedef shared_ptr<json_column> object_t;
-typedef shared_ptr<std::vector<object_t>> objects_t;
+typedef shared_ptr<json_column_plist> objects_t;
 typedef vector<unique_ptr<string>> line_t;
 typedef vector<shared_ptr<line_t>> lines_t;
 
